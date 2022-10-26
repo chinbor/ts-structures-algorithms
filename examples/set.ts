@@ -1,26 +1,33 @@
-export class Set {
-  private items: Record<PropertyKey, PropertyKey>
+import { defaultToString } from './dictionary'
 
-  constructor() {
+export class Set<T> {
+  private items: { [key: string]: T }
+
+  constructor(private toStrFn: (key: T) => string = defaultToString) {
     this.items = {}
   }
 
-  has(ele: PropertyKey) {
-    return Object.prototype.hasOwnProperty.call(this.items, ele)
+  has(ele: T) {
+    const key = this.toStrFn(ele)
+    return Object.prototype.hasOwnProperty.call(this.items, key)
   }
 
-  add(ele: PropertyKey) {
+  add(ele: T) {
     if (!this.has(ele)) {
-      this.items[ele] = ele
+      const key = this.toStrFn(ele)
+
+      this.items[key] = ele
       return true
     }
 
     return false
   }
 
-  delete(ele: PropertyKey) {
+  delete(ele: T) {
     if (this.has(ele)) {
-      delete this.items[ele]
+      const key = this.toStrFn(ele)
+
+      delete this.items[key]
       return true
     }
 
@@ -36,13 +43,14 @@ export class Set {
   }
 
   values() {
-    return Object.values<PropertyKey>(this.items)
+    return Object.values(this.items)
   }
 
   isEmpty() {
     return this.size() === 0
   }
 
+  // 注意！！！，一定要是能够字符串化的对象（也就是实现了 toString 方法）
   toString() {
     if (this.isEmpty())
       return ''
@@ -51,13 +59,13 @@ export class Set {
 
     let objString = `${String(values[0])}`
     for (let i = 1; i < values.length; i++)
-      objString = `${objString},${values[i].toString()}`
+      objString = `${objString},${String(values[i])}`
 
     return objString
   }
 
-  union(otherSet: Set) {
-    const unionSet = new Set()
+  union(otherSet: Set<T>) {
+    const unionSet = new Set<T>()
 
     this.values().forEach(val => unionSet.add(val))
     otherSet.values().forEach(val => unionSet.add(val))
@@ -65,8 +73,8 @@ export class Set {
     return unionSet
   }
 
-  intersection(otherSet: Set) {
-    const intersectionSet = new Set()
+  intersection(otherSet: Set<T>) {
+    const intersectionSet = new Set<T>()
 
     const values = this.values()
     const otherValues = otherSet.values()
@@ -89,8 +97,8 @@ export class Set {
     return intersectionSet
   }
 
-  difference(otherSet: Set) {
-    const differenceSet = new Set()
+  difference(otherSet: Set<T>) {
+    const differenceSet = new Set<T>()
 
     this.values().forEach((val) => {
       if (!otherSet.has(val))
@@ -100,7 +108,7 @@ export class Set {
     return differenceSet
   }
 
-  isSubsetOf(otherSet: Set) {
+  isSubsetOf(otherSet: Set<T>) {
     if (this.size() > otherSet.size())
       return false
 
