@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest'
 import { heapSort } from '../examples/heap-sort'
 
-describe('stack.ts', () => {
-  test('Stack', () => {
+describe('heap-sort.ts', () => {
+  test('sort', () => {
     const data = [
       {
         val: 1,
