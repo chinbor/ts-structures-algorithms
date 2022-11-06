@@ -50,7 +50,8 @@ export const breadthFirstSearch = (graph: Graph, startVertex: number | string, c
   }
 }
 
-export const shortestPathByBFS = (graph: Graph, startVertex: number | string) => {
+// 指定源顶点
+export const BFS = (graph: Graph, startVertex: number | string) => {
   const vertices = graph.getVertices()
   const adjList = graph.getAdjList()
   const color = initializeColor(vertices)
