@@ -2,6 +2,7 @@ import { describe, expect, test } from 'vitest'
 import { Graph } from '../examples/graph'
 import { BFS, breadthFirstSearch, buildPaths } from '../examples/breadth-first-search'
 import { DFS, depthFirstSearch, topSort } from '../examples/depth-first-search'
+import { dijkstra } from '../examples/dijkstra'
 
 describe('graph.ts', () => {
   const graph = new Graph()
@@ -100,7 +101,7 @@ describe('graph.ts', () => {
 
     const path = topSort(vertices, result.finished)
 
-    expect(path).toMatchInlineSnapshot('" - E - F - C - D - A - B"')
+    expect(path).toMatchInlineSnapshot('" - B - A - D - C - F - E"')
   })
 
   // 在 DFS 测试用例中改变顶点顺序
@@ -123,5 +124,38 @@ describe('graph.ts', () => {
     const path = topSort(vertices, result.finished)
 
     expect(path).toMatchInlineSnapshot('" - A - C - F - B - E - D"')
+  })
+
+  test('Dijkstra', () => {
+    const vertices = ['A', 'B', 'C', 'D', 'E', 'F']
+
+    const graph = [
+      [0, 2, 4, 0, 0, 0],
+      [0, 0, 1, 4, 2, 0],
+      [0, 0, 0, 0, 3, 0],
+      [0, 0, 0, 0, 0, 2],
+      [0, 0, 0, 3, 0, 2],
+      [0, 0, 0, 0, 0, 0],
+    ]
+
+    expect(dijkstra(vertices, graph, 1).tmp).toMatchInlineSnapshot(`
+      {
+        "B -> C": "B -> B -> C, 1",
+        "B -> D": "B -> B -> D, 4",
+        "B -> E": "B -> B -> E, 2",
+        "B -> F": "B -> E -> F, 4",
+      }
+    `)
+
+    expect(dijkstra(vertices, graph, 1).dist).toMatchInlineSnapshot(`
+      [
+        9007199254740991,
+        0,
+        1,
+        4,
+        2,
+        4,
+      ]
+    `)
   })
 })
