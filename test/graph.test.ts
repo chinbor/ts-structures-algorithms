@@ -3,6 +3,7 @@ import { Graph } from '../examples/graph'
 import { BFS, breadthFirstSearch, buildPaths } from '../examples/breadth-first-search'
 import { DFS, depthFirstSearch, topSort } from '../examples/depth-first-search'
 import { dijkstra } from '../examples/dijkstra'
+import { floydWarshall } from '../examples/floyd-warshall'
 
 describe('graph.ts', () => {
   const graph = new Graph()
@@ -155,6 +156,71 @@ describe('graph.ts', () => {
         4,
         2,
         4,
+      ]
+    `)
+  })
+
+  test('FloydWarshall', () => {
+    const INF = Infinity
+    const graph = [
+      [INF, 2, 4, INF, INF, INF],
+      [INF, INF, 1, 4, 2, INF],
+      [INF, INF, INF, INF, 3, INF],
+      [INF, INF, INF, INF, INF, 2],
+      [INF, INF, INF, 3, INF, 2],
+      [INF, INF, INF, INF, INF, INF],
+    ]
+
+    expect(floydWarshall(graph)).toMatchInlineSnapshot(`
+      [
+        [
+          0,
+          2,
+          3,
+          6,
+          4,
+          6,
+        ],
+        [
+          Infinity,
+          0,
+          1,
+          4,
+          2,
+          4,
+        ],
+        [
+          Infinity,
+          Infinity,
+          0,
+          6,
+          3,
+          5,
+        ],
+        [
+          Infinity,
+          Infinity,
+          Infinity,
+          0,
+          Infinity,
+          2,
+        ],
+        [
+          Infinity,
+          Infinity,
+          Infinity,
+          3,
+          0,
+          2,
+        ],
+        [
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          0,
+        ],
       ]
     `)
   })
