@@ -4,6 +4,8 @@ import { BFS, breadthFirstSearch, buildPaths } from '../examples/breadth-first-s
 import { DFS, depthFirstSearch, topSort } from '../examples/depth-first-search'
 import { dijkstra } from '../examples/dijkstra'
 import { floydWarshall } from '../examples/floyd-warshall'
+import { prim } from '../examples/prim'
+import { kruskal } from '../examples/kruskal'
 
 describe('graph.ts', () => {
   const graph = new Graph()
@@ -222,6 +224,57 @@ describe('graph.ts', () => {
           0,
         ],
       ]
+    `)
+  })
+
+  test('Prim', () => {
+    const graph = [[0, 2, 4, 0, 0, 0],
+      [2, 0, 2, 4, 2, 0],
+      [4, 2, 0, 0, 3, 0],
+      [0, 4, 0, 0, 3, 2],
+      [0, 2, 3, 3, 0, 2],
+      [0, 0, 0, 2, 2, 0],
+    ]
+    const parent = prim(graph)
+
+    let str = ''
+
+    for (let i = 1; i < graph.length; i++)
+      str += `${parent[i]} - ${i}   ${graph[i][parent[i]]}\n`
+
+    expect(str).toMatchInlineSnapshot(`
+      "0 - 1   2
+      1 - 2   2
+      5 - 3   2
+      1 - 4   2
+      4 - 5   2
+      "
+    `)
+  })
+
+  // BUG: Oops !!! It's wrong!!!
+  test('kruskal', () => {
+    const graph = [[0, 2, 4, 0, 0, 0],
+      [2, 0, 2, 4, 2, 0],
+      [4, 2, 0, 0, 3, 0],
+      [0, 4, 0, 0, 3, 2],
+      [0, 2, 3, 3, 0, 2],
+      [0, 0, 0, 2, 2, 0],
+    ]
+    const parent = kruskal(graph)
+
+    let str = ''
+
+    for (let i = 1; i < graph.length; i++)
+      str += `${parent[i]} - ${i}   ${graph[i][parent[i]]}\n`
+
+    expect(str).toMatchInlineSnapshot(`
+      "0 - 1   2
+      1 - 2   2
+      1 - 3   4
+      1 - 4   2
+      3 - 5   2
+      "
     `)
   })
 })
