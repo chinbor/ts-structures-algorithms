@@ -2,6 +2,7 @@ import { describe, expect, test } from 'vitest'
 import { modifiedBubbleSort } from '../examples/bubble-sort'
 import { selectionSort } from '../examples/selection-sort'
 import { insertionSort } from '../examples/insertion-sort'
+import { mergeSort } from '../examples/merge-sort'
 
 describe('Sorts', () => {
   test('bubbleSort', () => {
@@ -43,6 +44,23 @@ describe('Sorts', () => {
         3,
         4,
         5,
+        7,
+        8,
+      ]
+    `)
+  })
+
+  test('mergeSort', () => {
+    const arr = [8, 7, 6, 5, 4, 3, 2, 1]
+
+    expect(mergeSort(arr)).toMatchInlineSnapshot(`
+      [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
         7,
         8,
       ]
