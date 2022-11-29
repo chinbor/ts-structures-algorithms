@@ -3,6 +3,7 @@ import { modifiedBubbleSort } from '../examples/bubble-sort'
 import { selectionSort } from '../examples/selection-sort'
 import { insertionSort } from '../examples/insertion-sort'
 import { mergeSort } from '../examples/merge-sort'
+import { quickSort } from '../examples/quick-sort'
 
 describe('Sorts', () => {
   test('bubbleSort', () => {
@@ -63,6 +64,22 @@ describe('Sorts', () => {
         6,
         7,
         8,
+      ]
+    `)
+  })
+
+  test('quickSort', () => {
+    const arr = [3, 5, 1, 6, 4, 7, 2]
+
+    expect(quickSort(arr)).toMatchInlineSnapshot(`
+      [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
       ]
     `)
   })
