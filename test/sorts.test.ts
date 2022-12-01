@@ -4,6 +4,7 @@ import { selectionSort } from '../examples/selection-sort'
 import { insertionSort } from '../examples/insertion-sort'
 import { mergeSort } from '../examples/merge-sort'
 import { quickSort } from '../examples/quick-sort'
+import { countingSort } from '../examples/counting-sort'
 
 describe('Sorts', () => {
   test('bubbleSort', () => {
@@ -74,6 +75,24 @@ describe('Sorts', () => {
     expect(quickSort(arr)).toMatchInlineSnapshot(`
       [
         1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+      ]
+    `)
+  })
+
+  test('countingSort', () => {
+    const arr = [3, 5, 1, 6, 4, 7, 2, 1, 2]
+
+    expect(countingSort(arr)).toMatchInlineSnapshot(`
+      [
+        1,
+        1,
+        2,
         2,
         3,
         4,
