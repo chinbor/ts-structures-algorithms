@@ -6,6 +6,7 @@ import { mergeSort } from '../examples/merge-sort'
 import { quickSort } from '../examples/quick-sort'
 import { countingSort } from '../examples/counting-sort'
 import { bucketSort } from '../examples/bucket-sort'
+import { radixSort } from '../examples/radix-sort'
 
 describe('Sorts', () => {
   test('bubbleSort', () => {
@@ -118,6 +119,25 @@ describe('Sorts', () => {
         5,
         6,
         7,
+      ]
+    `)
+  })
+
+  test('radixSort', () => {
+    const arr = [322, 512, 13423, 6123, 421, 223, 734, 21, 12, 2]
+
+    expect(radixSort(arr)).toMatchInlineSnapshot(`
+      [
+        2,
+        12,
+        21,
+        223,
+        322,
+        421,
+        512,
+        734,
+        6123,
+        13423,
       ]
     `)
   })
