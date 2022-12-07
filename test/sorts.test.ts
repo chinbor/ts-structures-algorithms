@@ -3,7 +3,7 @@ import { modifiedBubbleSort } from '../examples/bubble-sort'
 import { selectionSort } from '../examples/selection-sort'
 import { insertionSort } from '../examples/insertion-sort'
 import { mergeSort } from '../examples/merge-sort'
-import { quickSort } from '../examples/quick-sort'
+import { quickSort, quickSortByChatGpt } from '../examples/quick-sort'
 import { countingSort } from '../examples/counting-sort'
 import { bucketSort } from '../examples/bucket-sort'
 import { radixSort } from '../examples/radix-sort'
@@ -83,6 +83,32 @@ describe('Sorts', () => {
         5,
         6,
         7,
+      ]
+    `)
+  })
+
+  test('quickSortByChatGpt', () => {
+    const arr = [322, 512, 13423, 6123, 421, 223, 734, 21, 12, 2, 100, 321, 343, 12313, 345345, 123435, 456]
+
+    expect(quickSortByChatGpt(arr)).toMatchInlineSnapshot(`
+      [
+        2,
+        12,
+        21,
+        100,
+        223,
+        321,
+        322,
+        343,
+        421,
+        456,
+        512,
+        734,
+        6123,
+        12313,
+        13423,
+        123435,
+        345345,
       ]
     `)
   })
